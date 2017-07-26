@@ -723,6 +723,9 @@
 	<form id="ajax-contact-form" class="form-horizontal" action="">
 		<div class="row">
 			<div class="col-sm-6">
+				<div class="form-group infoCenter"></div>
+			</div>
+			<div class="col-sm-6">
 				<div class="form-group">
 				    <label for="inputName">Your Name</label>
 				    <input type="text" class="form-control" id="inputName" name="name" placeholder="Full Name">
@@ -997,7 +1000,7 @@
 				</div>
 			</div>
 		</div>
-		<button type="submit" class="btn-default btn-cf-submit">Submit</button>
+		<button type="submit" class="btn-default btn-cf-submit btn-sub">Submit</button>
 	</form>
 	
 </div>
@@ -1099,6 +1102,27 @@
 			$('.btn-play').css({position:'fixed'});
 			
 		});
+		
+		
+		//form submission
+		$('#ajax-contact-form').submit(function(e){
+			e.preventDefault();
+			var data = $(this).serialize();
+			var url = "script.php";
+			$('.btn-sub').prop('disabled', true).html('<i class="fa fa-spinner"></i> Please wait');
+			$.post(url, data, function(resp){
+				$('.btn-sub').prop('disabled', false).html('Submit');
+			
+				if(resp.status == 200){
+						$('.infoCenter').html('<div class="alert alert-success">'+resp.message+'</div>');
+				}else{
+					
+					$('.infoCenter').html('<div class="alert alert-warning">'+resp.message+'</div>');
+				
+				}
+			},'json');
+		})
+
 
 	})	
 </script>
