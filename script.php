@@ -1,6 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *'); 
-header('Content-Type: Application/JSON'); 
+header('Content-Type: application/json'); 
 
 if($_POST['name'] AND  $_POST['country'] AND $_POST['email'] AND $_POST['phone'] AND $_POST['message']) {
  
